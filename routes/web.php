@@ -13,4 +13,8 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('login', 'Auth\SecurityController@redirectToProvider');
+Route::get('login/callback', 'Auth\SecurityController@handleProviderCallback');
+Route::get('logout', 'Auth\SecurityController@logout');
