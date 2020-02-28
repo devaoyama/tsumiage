@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('login', 'Auth\SecurityController@redirectToProvider');
-Route::get('login/callback', 'Auth\SecurityController@handleProviderCallback');
-Route::get('logout', 'Auth\SecurityController@logout');
+Route::get('/login', 'Auth\SecurityController@redirectToProvider');
+Route::get('/login/callback', 'Auth\SecurityController@handleProviderCallback');
+Route::get('/logout', 'Auth\SecurityController@logout');
+
+Route::get('/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
+Route::post('/tasks/create', 'TaskController@create');
