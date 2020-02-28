@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTsumiageDatesTable extends Migration
+class CreateDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTsumiageDatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tsumiage_dates', function (Blueprint $table) {
+        Schema::create('dates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->date('date');
@@ -30,6 +30,6 @@ class CreateTsumiageDatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tsumiage_dates');
+        Schema::dropIfExists('dates');
     }
 }
