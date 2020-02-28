@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTsumiageTasksTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTsumiageTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tsumiage_tasks', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('tsumiage_date_id')->unsigned();
+            $table->bigInteger('date_id')->unsigned();
             $table->string('title');
             $table->boolean('status')->default(false);
             $table->timestamps();
 
-            $table->foreign('tsumiage_date_id')->references('id')->on('tsumiage_dates');
+            $table->foreign('date_id')->references('id')->on('dates');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateTsumiageTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tsumiage_tasks');
+        Schema::dropIfExists('tasks');
     }
 }
