@@ -15,7 +15,7 @@ class SecurityController extends Controller
     public function redirectToProvider()
     {
         if(Auth::check()) {
-            return redirect()->route('welcome');
+            return redirect()->route('mypage');
         }
 
         return Socialite::driver('twitter')->redirect();
@@ -27,26 +27,26 @@ class SecurityController extends Controller
     public function handleProviderCallback()
     {
         if(Auth::check()) {
-            redirect()->route('welcome');
+            redirect()->route('mypage');
         }
 
         try {
             $user = Socialite::driver('twitter')->user();
         } catch (\Exception $e) {
-            return redirect()->route('welcome');
+            return redirect()->route('home');
         }
 
         $authUser = $this->findOrCreateUser($user);
         Auth::login($authUser, true);
 
-        return redirect()->route('welcome');
+        return redirect()->route('mypage');
     }
 
     public function logout()
     {
         Auth::logout();
 
-        return redirect()->route('welcome');
+        return redirect()->route('home');
     }
 
     private function findOrCreateUser($user)

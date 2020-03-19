@@ -28,6 +28,23 @@ class TaskController extends Controller
         $task->title = $request->title;
         $date->tasks()->save($task);
 
-        return redirect()->route('home');
+        return redirect()->route('mypage');
+    }
+
+    public function changeStatus($id)
+    {
+        $task = Task::find($id);
+        $task->status = !$task->status;
+        $task->save();
+
+        return redirect()->route('mypage');
+    }
+
+    public function delete($id)
+    {
+        $task = Task::find($id);
+        $task->delete();
+
+        return redirect()->route('mypage');
     }
 }
