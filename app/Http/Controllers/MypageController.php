@@ -14,14 +14,11 @@ class MypageController extends Controller
         $today = Carbon::today();
         $tasks = null;
         if ($dates = Auth::user()->dates()->where('date', $today)->first()) {
-            $tasks = $dates;
-            if ($date = $tasks->where('date', $today)->first()) {
-                $tasks = $date;
-                if ($value = $tasks->tasks()->get()) {
-                    $tasks = $value;
-                }
+            if ($dates->tasks()->get()->count()) {
+                $tasks = $dates->tasks()->get();
             }
         }
+
         return view('mypage.index', [
             'today' => $today,
             'tasks' => $tasks,

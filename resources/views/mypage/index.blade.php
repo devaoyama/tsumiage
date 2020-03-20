@@ -18,13 +18,13 @@
                             <td @if($task->status) class="done" @endif>{{ $task->title }}</td>
                             <td>
                                 @if($task->status)
-                                    <a href="{{ route('tasks.changeStatus', ['id' => $task->id]) }}" class="btn btn-info">完了</a>
+                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}" class="btn btn-info">完了</a>
                                 @else
-                                    <a href="{{ route('tasks.changeStatus', ['id' => $task->id]) }}" class="btn btn-warning">未完了</a>
+                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}" class="btn btn-warning">未完了</a>
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('tasks.delete', ['id' => $task->id]) }}" class="btn bnt-sm btn-danger">削除</a>
+                                <a href="{{ route('tasks.delete', ['task' => $task]) }}" class="btn bnt-sm btn-danger">削除</a>
                             </td>
                         </tr>
                     @endforeach
