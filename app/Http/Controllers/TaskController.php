@@ -31,18 +31,16 @@ class TaskController extends Controller
         return redirect()->route('mypage');
     }
 
-    public function changeStatus($id)
+    public function changeStatus(Task $task)
     {
-        $task = Task::find($id);
         $task->status = !$task->status;
         $task->save();
 
         return redirect()->route('mypage');
     }
 
-    public function delete($id)
+    public function delete(Task $task)
     {
-        $task = Task::find($id);
         $task->delete();
 
         return redirect()->route('mypage');

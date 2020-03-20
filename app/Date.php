@@ -12,4 +12,9 @@ class Date extends Model
     {
         return $this->hasMany('App\Task');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
