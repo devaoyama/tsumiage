@@ -19,7 +19,14 @@ class TaskController extends Controller
     {
         $date = Auth::user()->dates()->where('date', Carbon::today())->first();
 
-        if($date == null) {
+        if($date === null) {
+            // 前のdateとtaskを削除
+            $otherDay = Auth::user()->dates()->first();
+            if ($otherDay) {
+                $otherDay->delete();
+            }
+
+            // dateを作成
             $date = new Date();
             $date->date = Carbon::today();
             Auth::user()->dates()->save($date);
