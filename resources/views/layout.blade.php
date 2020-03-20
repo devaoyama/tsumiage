@@ -27,11 +27,14 @@
             <div class="collapse navbar-collapse" id="navbarNav4">
                 <ul class="navbar-nav ml-auto">
                     @if(Auth::check())
-                        <li class="nav-item active">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('mypage') }}">マイページ</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/logout">ログアウト</a>
                         </li>
                     @else
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="/login">ログイン</a>
                         </li>
                     @endif

@@ -11,31 +11,33 @@
                     <tr>
                         <th>タスク名</th>
                         <th>ステータス</th>
-                        <th>削除</th>
                     </tr>
                     @foreach($tasks as $task)
                         <tr>
-                            <td @if($task->status) class="done" @endif>{{ $task->title }}</td>
+                            <td>{{ $task->title }}</td>
                             <td>
                                 @if($task->status)
-                                    <a href="{{ route('tasks.changeStatus', ['id' => $task->id]) }}" class="btn btn-info">完了</a>
+                                    <span class="badge badge-info">完了</span>
                                 @else
-                                    <a href="{{ route('tasks.changeStatus', ['id' => $task->id]) }}" class="btn btn-warning">未完了</a>
+                                    <span class="badge badge-warning">未完了</span>
                                 @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('tasks.delete', ['id' => $task->id]) }}" class="btn bnt-sm btn-danger">削除</a>
                             </td>
                         </tr>
                     @endforeach
                 </table>
+                <form action="{{ route('tweet.tweet') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="text">ひとこと</label>
+                        <textarea class="form-control" name="text" id="text">{{ old('text') }}</textarea>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">ツイート</button>
+                    </div>
+                </form>
             @else
                 <h4>タスクはありません</h4>
             @endif
-            <div>
-                <a href="{{ route('tasks.create') }}" class="btn btn-primary">タスク作成</a>
-                <a href="{{ route('tweet.index') }}" class="btn btn-primary">ツイート</a>
-            </div>
         </div>
     </div>
 @endsection
