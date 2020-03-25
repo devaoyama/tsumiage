@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Date;
+use App\DataProvider\TaskRepository;
 use App\Http\Requests\TaskCreate;
 use App\Task;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -15,40 +13,23 @@ class TaskController extends Controller
         return view('task.create');
     }
 
-    public function create(TaskCreate $request, Task $task)
+    public function create(TaskCreate $request, TaskRepository $repository)
     {
-        $date = Auth::user()->dates()->where('date', Carbon::today())->first();
-
-        if($date === null) {
-            // 前のdateとtaskを削除
-            $otherDay = Auth::user()->dates()->first();
-            if ($otherDay) {
-                $otherDay->delete();
-            }
-
-            // dateを作成
-            $date = new Date();
-            $date->date = Carbon::today();
-            Auth::user()->dates()->save($date);
-        }
-
-        $task->title = $request->title;
-        $date->tasks()->save($task);
+        $repository->createTask($request);
 
         return redirect()->route('mypage');
     }
 
-    public function changeStatus(Task $task)
+    public function changeStatus(Task $task, TaskRepository $repository)
     {
-        $task->status = !$task->status;
-        $task->save();
+        $repository->changeStatus($task);
 
         return redirect()->route('mypage');
     }
 
-    public function delete(Task $task)
+    public function delete(Task $task, TaskRepository $repository)
     {
-        $task->delete();
+        $repository->deleteTask($task);
 
         return redirect()->route('mypage');
     }

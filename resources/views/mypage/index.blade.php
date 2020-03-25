@@ -6,7 +6,7 @@
             <h3>
                 {{ $today->isoFormat('YYYY年MM月DD日 (ddd)') }}
             </h3>
-            @if($tasks)
+            @if($tasks && $tasks->count())
                 <table class="table">
                     <tr>
                         <th>タスク名</th>

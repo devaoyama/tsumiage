@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\DataProvider\TaskRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
 {
-    public function index()
+    public function index(TaskRepository $repository)
     {
         Carbon::setLocale('ja_JP');
         $today = Carbon::today();
-        $tasks = null;
-        if ($dates = Auth::user()->dates()->where('date', $today)->first()) {
-            if ($dates->tasks()->get()->count()) {
-                $tasks = $dates->tasks()->get();
-            }
-        }
+        $tasks = $repository->getTodayTasks($today);
 
         return view('mypage.index', [
             'today' => $today,
