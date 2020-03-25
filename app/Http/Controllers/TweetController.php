@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Abraham\TwitterOAuth\TwitterOAuthException;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class TweetController extends Controller
 {
@@ -36,6 +38,8 @@ class TweetController extends Controller
             $user->twitter_token_secret
         );
 
+        $connection->setTimeouts(10, 15);
+
         Carbon::setLocale('ja_JP');
         $today = Carbon::today();
         $tasks = null;
@@ -59,13 +63,12 @@ class TweetController extends Controller
             $text = $text."\n".$value;
         }
 
-        $connection->post("statuses/update", ["status" => $text]);
-
-        if ($connection->getLastHttpCode() == 200) {
-            return redirect()->route('mypage');
-        } else {
-            dd($connection->getLastHttpCode());
-            return false;
+        try {
+            $connection->post("statuses/update", ["status" => $text]);
+        } catch (TwitterOAuthException $exception) {
+            dd($connection->getLastHttpCode(), $exception->getMessage());
         }
+
+        return redirect()->route('mypage');
     }
 }
