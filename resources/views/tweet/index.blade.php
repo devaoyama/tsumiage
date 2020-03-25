@@ -6,6 +6,11 @@
             <h3>
                 {{ $today->isoFormat('YYYY年MM月DD日 (ddd)') }}
             </h3>
+            @if(session('message'))
+                <div class="alert alert-danger">
+                    {{ session('message') }}
+                </div>
+            @endif
             @if($tasks)
                 <table class="table">
                     <tr>

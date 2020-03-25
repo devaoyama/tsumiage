@@ -6,6 +6,16 @@
             <h3>
                 {{ $today->isoFormat('YYYY年MM月DD日 (ddd)') }}
             </h3>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             @if($tasks && $tasks->count())
                 <table class="table">
                     <tr>
@@ -28,14 +38,18 @@
                             </td>
                         </tr>
                     @endforeach
+
                 </table>
+                <div>
+                    <a href="{{ route('tasks.create') }}" class="btn btn-primary">タスク作成</a>
+                    <a href="{{ route('tweet.index') }}" class="btn btn-primary">ツイート</a>
+                </div>
             @else
                 <h4>タスクはありません</h4>
+                <div>
+                    <a href="{{ route('tasks.create') }}" class="btn btn-primary">タスク作成</a>
+                </div>
             @endif
-            <div>
-                <a href="{{ route('tasks.create') }}" class="btn btn-primary">タスク作成</a>
-                <a href="{{ route('tweet.index') }}" class="btn btn-primary">ツイート</a>
-            </div>
         </div>
     </div>
 @endsection

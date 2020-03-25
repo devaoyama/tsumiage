@@ -17,6 +17,10 @@ class TweetController extends Controller
         $today = Carbon::today();
         $tasks = $repository->getTodayTasks($today);
 
+        if (!$tasks || $tasks->count() === 0) {
+            return redirect()->route('mypage');
+        }
+
         return view('tweet.index', [
             'today' => $today,
             'tasks' => $tasks,
@@ -51,12 +55,23 @@ class TweetController extends Controller
             $text = $text."\n".$value;
         }
 
+        $errorMsg = null;
         try {
             $connection->post("statuses/update", ["status" => $text]);
         } catch (TwitterOAuthException $exception) {
-            dd($connection->getLastHttpCode(), $exception->getMessage());
+            $errorMsg = $exception->getMessage();
         }
 
-        return redirect()->route('mypage');
+        $code = $connection->getLastHttpCode();
+
+        if ($code === 200) {
+            return redirect()->route('mypage')->with('success', '投稿が完了しました');
+        }
+
+        if ($code === 403) {
+            return redirect()->route('tweet.index')->with('message', '文字数が長すぎます');
+        }
+
+        return redirect()->route('mypage')->with('error', $errorMsg);
     }
 }
