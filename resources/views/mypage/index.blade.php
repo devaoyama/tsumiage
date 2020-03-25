@@ -16,7 +16,7 @@
                     {{ session('error') }}
                 </div>
             @endif
-            @if($tasks && $tasks->count())
+            @if($tasks && $tasks->isNotEmpty())
                 <table class="table">
                     <tr>
                         <th>タスク名</th>

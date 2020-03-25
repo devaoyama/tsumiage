@@ -17,7 +17,7 @@ class TweetController extends Controller
         $today = Carbon::today();
         $tasks = $repository->getTodayTasks($today);
 
-        if (!$tasks || $tasks->count() === 0) {
+        if (!$tasks || $tasks->isNotEmpty()) {
             return redirect()->route('mypage');
         }
 
