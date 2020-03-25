@@ -4,23 +4,18 @@ namespace App\Http\Controllers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Abraham\TwitterOAuth\TwitterOAuthException;
+use App\DataProvider\TaskRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class TweetController extends Controller
 {
-    public function index()
+    public function index(TaskRepository $repository)
     {
         Carbon::setLocale('ja_JP');
         $today = Carbon::today();
-        $tasks = null;
-        if ($dates = Auth::user()->dates()->where('date', $today)->first()) {
-            if ($dates->tasks()->get()->count()) {
-                $tasks = $dates->tasks()->get();
-            }
-        }
+        $tasks = $repository->getTodayTasks($today);
 
         return view('tweet.index', [
             'today' => $today,
@@ -28,7 +23,7 @@ class TweetController extends Controller
         ]);
     }
 
-    public function tweet(Request $request)
+    public function tweet(Request $request, TaskRepository $repository)
     {
         $user = Auth::user();
         $connection = new TwitterOAuth(
@@ -37,17 +32,10 @@ class TweetController extends Controller
             $user->twitter_token,
             $user->twitter_token_secret
         );
-
         $connection->setTimeouts(10, 15);
 
-        Carbon::setLocale('ja_JP');
         $today = Carbon::today();
-        $tasks = null;
-        if ($dates = Auth::user()->dates()->where('date', $today)->first()) {
-            if ($dates->tasks()->get()->count()) {
-                $tasks = $dates->tasks()->get();
-            }
-        }
+        $tasks = $repository->getTodayTasks($today);
 
         $text = "#今日の積み上げ\n";
         foreach ($tasks as $task) {
