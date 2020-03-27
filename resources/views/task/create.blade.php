@@ -17,7 +17,8 @@
                     <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" />
                 </div>
             </div>
-            <div class="text-center">
+            <div class="d-flex justify-content-around">
+                <button type="button" onclick="history.back()" class="btn btn-primary" value="true">戻る</button>
                 <button type="submit" class="btn btn-primary">追加</button>
             </div>
         </form>

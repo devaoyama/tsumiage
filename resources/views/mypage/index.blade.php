@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-3">
         <div class="text-center">
-            <h3>
+            <h3 class="mb-3">
                 {{ $today->isoFormat('YYYY年MM月DD日 (ddd)') }}
             </h3>
             @if(session('success'))
@@ -17,7 +17,7 @@
                 </div>
             @endif
             @if($tasks && $tasks->isNotEmpty())
-                <table class="table">
+                <table class="table mb-4">
                     <tr>
                         <th>タスク名</th>
                         <th>ステータス</th>
