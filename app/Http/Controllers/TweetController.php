@@ -72,6 +72,10 @@ class TweetController extends Controller
             return redirect()->route('tweet.index')->with('message', '文字数が長すぎます');
         }
 
+        if (!$errorMsg) {
+            $errorMsg = 'ツイートに失敗しました。再度ログインしてみてください';
+        }
+
         return redirect()->route('mypage')->with('error', $errorMsg);
     }
 }
