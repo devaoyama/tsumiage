@@ -37,7 +37,7 @@
                         <textarea class="form-control" name="text" id="text" rows="5">{{ old('text') }}</textarea>
                     </div>
                     <div class="d-flex justify-content-around">
-                        <button type="button" onclick="history.back()" class="btn btn-primary" value="true">戻る</button>
+                        <a class="btn btn-primary" href="{{ route('mypage') }}">戻る</a>
                         <button type="submit" class="btn btn-primary">ツイート</button>
                     </div>
                 </form>

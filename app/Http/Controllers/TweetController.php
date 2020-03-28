@@ -69,7 +69,7 @@ class TweetController extends Controller
         }
 
         if ($code === 403) {
-            return redirect()->route('tweet.index')->with('message', '文字数が長すぎます');
+            return redirect()->route('tweet.index')->with('message', '文字数が長すぎます')->withInput();
         }
 
         if (!$errorMsg) {
