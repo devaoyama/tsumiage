@@ -42,7 +42,7 @@
 
                 </table>
                 <div class="text-right">
-                    <a href="{{ route('tweet.index') }}" class="btn btn-primary">ツイート</a>
+                    <a href="{{ route('tweet.index') }}" class="btn btn-primary"><i class="fab fa-twitter-square"></i> ツイートする</a>
                 </div>
             @else
                 <h4>タスクはありません</h4>
