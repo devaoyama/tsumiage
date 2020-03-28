@@ -19,8 +19,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function dates()
+    public function date()
     {
-        return $this->hasMany('App\Date');
+        return $this->hasOne('App\Date');
     }
 }

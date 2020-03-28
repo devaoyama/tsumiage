@@ -2,21 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\DataProvider\DateRepository;
 use App\DataProvider\TaskRepository;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
 {
-    public function index(TaskRepository $repository)
+    public function index(TaskRepository $taskRepository, DateRepository $dateRepository)
     {
         Carbon::setLocale('ja_JP');
-        $today = Carbon::today();
-        $tasks = $repository->getTodayTasks($today);
+        $day = Carbon::today();
+
+        if ($dateRepository->getDate()->date != $day->toDateString() && $dateRepository->getTweetCount() >= 2) {
+            $dateRepository->createDate();
+        }
+
+        $tasks = $taskRepository->getTasks();
+
+        if ($tasks) {
+            $day = Carbon::parse($dateRepository->getDate()->date);
+        }
 
         return view('mypage.index', [
-            'today' => $today,
+            'today' => $day,
             'tasks' => $tasks,
         ]);
     }

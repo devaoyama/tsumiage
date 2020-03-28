@@ -20,23 +20,20 @@ class TaskRepository
         $this->dateRepository = $dateRepository;
     }
 
-    public function getTodayTasks($today)
+    public function getTasks()
     {
         $tasks = null;
-        if ($dates = Auth::user()->dates()->where('date', $today)->first()) {
-            if ($tasks = $dates->tasks()->get());
+        if ($date = Auth::user()->date) {
+            if ($tasks = $date->tasks);
         }
         return $tasks;
     }
 
     public function createTask(TaskCreate $request)
     {
-        $date = $this->dateRepository->getTodayDate();
+        $date = $this->dateRepository->getDate();
 
         if($date === null) {
-            // 前のdateとtaskを削除
-            $this->dateRepository->deleteOtherDate();
-
             // dateを作成
             $date = $this->dateRepository->createDate();
         }

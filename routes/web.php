@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', 'Auth\SecurityController@logout');
     Route::get('/mypage', 'MypageController@index')->name('mypage');
     Route::post('/mypage/tasks/create', 'TaskController@create')->name('tasks.create');
+    Route::get('/mypage/dates/create', 'DateController@create')->name('dates.create');
 
     Route::group(['middleware' => 'can:update,task'], function() {
         Route::get('/mypage/tasks/{task}/change_status', 'TaskController@changeStatus')->name('tasks.changeStatus');
