@@ -22,9 +22,9 @@
                             <td>{{ $task->title }}</td>
                             <td>
                                 @if($task->status)
-                                    <span class="badge badge-info">完了</span>
+                                    <i class="far fa-check-circle text-primary" style="font-size: 25px"></i>
                                 @else
-                                    <span class="badge badge-warning">未完了</span>
+                                    <i class="far fa-times-circle text-secondary" style="font-size: 25px"></i>
                                 @endif
                             </td>
                         </tr>
