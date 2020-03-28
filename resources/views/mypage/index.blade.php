@@ -16,39 +16,36 @@
                     {{ session('error') }}
                 </div>
             @endif
+            @include('task._create')
             @if($tasks && $tasks->isNotEmpty())
                 <table class="table mb-4">
                     <tr>
+                        <th></th>
                         <th>タスク名</th>
-                        <th>ステータス</th>
                         <th>削除</th>
                     </tr>
                     @foreach($tasks as $task)
                         <tr>
-                            <td @if($task->status) class="done" @endif>{{ $task->title }}</td>
                             <td>
                                 @if($task->status)
-                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}" class="btn btn-info">完了</a>
+                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}"><i class="far fa-check-circle text-primary" style="font-size: 25px"></i></a>
                                 @else
-                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}" class="btn btn-warning">未完了</a>
+                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}"><i class="far fa-circle text-secondary" style="font-size: 25px"></i></a>
                                 @endif
                             </td>
+                            <td @if($task->status) class="done" @endif>{{ $task->title }}</td>
                             <td>
-                                <a href="{{ route('tasks.delete', ['task' => $task]) }}" class="btn bnt-sm btn-danger">削除</a>
+                                <a href="{{ route('tasks.delete', ['task' => $task]) }}"><i class="fas fa-minus-circle text-danger" style="font-size: 25px"></i></a>
                             </td>
                         </tr>
                     @endforeach
 
                 </table>
-                <div>
-                    <a href="{{ route('tasks.create') }}" class="btn btn-primary">タスク作成</a>
+                <div class="text-right">
                     <a href="{{ route('tweet.index') }}" class="btn btn-primary">ツイート</a>
                 </div>
             @else
                 <h4>タスクはありません</h4>
-                <div>
-                    <a href="{{ route('tasks.create') }}" class="btn btn-primary">タスク作成</a>
-                </div>
             @endif
         </div>
     </div>

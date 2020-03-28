@@ -8,11 +8,6 @@ use App\Task;
 
 class TaskController extends Controller
 {
-    public function showCreateForm()
-    {
-        return view('task.create');
-    }
-
     public function create(TaskCreate $request, TaskRepository $repository)
     {
         $repository->createTask($request);

@@ -21,8 +21,7 @@ Route::get('/login/callback', 'Auth\SecurityController@handleProviderCallback');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', 'Auth\SecurityController@logout');
     Route::get('/mypage', 'MypageController@index')->name('mypage');
-    Route::get('/mypage/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
-    Route::post('/mypage/tasks/create', 'TaskController@create');
+    Route::post('/mypage/tasks/create', 'TaskController@create')->name('tasks.create');
 
     Route::group(['middleware' => 'can:update,task'], function() {
         Route::get('/mypage/tasks/{task}/change_status', 'TaskController@changeStatus')->name('tasks.changeStatus');
