@@ -10,7 +10,7 @@
         @csrf
         <div class="form-group row">
             <div class="col">
-                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" />
+                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" placeholder="タスクを入力してください">
             </div>
             <div class="mr-2">
                 <button type="submit" class="btn btn-dark rounded-circle"><i class="fas fa-plus"></i></button>

@@ -25,7 +25,8 @@ class DateRepository
     {
         $this->deleteOtherDate();
         $this->date->date = Carbon::today();
-        return Auth::user()->date()->save($this->date);
+        Auth::user()->date()->save($this->date);
+        return $this->date;
     }
 
     public function getTweetCount()

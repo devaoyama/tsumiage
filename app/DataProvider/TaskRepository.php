@@ -34,7 +34,6 @@ class TaskRepository
         $date = $this->dateRepository->getDate();
 
         if($date === null) {
-            // dateを作成
             $date = $this->dateRepository->createDate();
         }
 
