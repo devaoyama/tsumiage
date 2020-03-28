@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Abraham\TwitterOAuth\TwitterOAuthException;
+use App\DataProvider\DateRepository;
 use App\DataProvider\TaskRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class TweetController extends Controller
     {
         Carbon::setLocale('ja_JP');
         $today = Carbon::today();
-        $tasks = $repository->getTodayTasks($today);
+        $tasks = $repository->getTasks();
 
         if (!$tasks || $tasks->isEmpty()) {
             return redirect()->route('mypage');
@@ -29,8 +30,7 @@ class TweetController extends Controller
 
     public function tweetConfirm(Request $request, TaskRepository $repository)
     {
-        $today = Carbon::today();
-        $tasks = $repository->getTodayTasks($today);
+        $tasks = $repository->getTasks();
 
         $text = "#今日の積み上げ\n";
         foreach ($tasks as $task) {
@@ -52,7 +52,7 @@ class TweetController extends Controller
         ]);
     }
 
-    public function tweet(Request $request, TaskRepository $repository)
+    public function tweet(Request $request, DateRepository $repository)
     {
         $user = Auth::user();
         $connection = new TwitterOAuth(
@@ -76,6 +76,7 @@ class TweetController extends Controller
         $code = $connection->getLastHttpCode();
 
         if ($code === 200) {
+            $repository->countUp();
             return redirect()->route('mypage')->with('success', '投稿が完了しました');
         }
 

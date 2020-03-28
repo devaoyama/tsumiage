@@ -16,20 +16,33 @@ class DateRepository
         $this->date = $date;
     }
 
-    public function getTodayDate()
+    public function getDate()
     {
-        return Auth::user()->dates()->where('date', Carbon::today())->first();
+        return Auth::user()->date;
     }
 
     public function createDate()
     {
+        $this->deleteOtherDate();
         $this->date->date = Carbon::today();
-        return Auth::user()->dates()->save($this->date);
+        return Auth::user()->date()->save($this->date);
     }
 
-    public function deleteOtherDate()
+    public function getTweetCount()
     {
-        if ($otherDay = Auth::user()->dates()->first()) {
+        return $this->getDate()->tweet_count;
+    }
+
+    public function countUp()
+    {
+        $date = $this->getDate();
+        $date->tweet_count += 1;
+        $date->save();
+    }
+
+    private function deleteOtherDate()
+    {
+        if ($otherDay = Auth::user()->date) {
             $otherDay->delete();
         }
     }
