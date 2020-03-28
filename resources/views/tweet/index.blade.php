@@ -30,15 +30,15 @@
                         </tr>
                     @endforeach
                 </table>
-                <form action="{{ route('tweet.tweet') }}" method="POST">
+                <form action="{{ route('tweet.confirm') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="text">ひとこと</label>
-                        <textarea class="form-control" name="text" id="text" rows="5">{{ old('text') }}</textarea>
+                        <label for="comment">ひとこと</label>
+                        <textarea class="form-control" name="comment" id="comment" rows="5">{{ old('comment') }}</textarea>
                     </div>
                     <div class="d-flex justify-content-around">
-                        <a class="btn btn-primary" href="{{ route('mypage') }}">戻る</a>
-                        <button type="submit" class="btn btn-primary">ツイート</button>
+                        <a class="btn btn-primary" href="{{ route('mypage') }}"><i class="fas fa-backward"></i> 戻る</a>
+                        <button type="submit" class="btn btn-primary">確認画面へ <i class="fas fa-forward"></i></button>
                     </div>
                 </form>
             @else

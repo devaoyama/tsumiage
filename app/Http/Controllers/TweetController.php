@@ -27,17 +27,8 @@ class TweetController extends Controller
         ]);
     }
 
-    public function tweet(Request $request, TaskRepository $repository)
+    public function tweetConfirm(Request $request, TaskRepository $repository)
     {
-        $user = Auth::user();
-        $connection = new TwitterOAuth(
-            config('app.twitter_consumer_key'),
-            config('app.twitter_secret_key'),
-            $user->twitter_token,
-            $user->twitter_token_secret
-        );
-        $connection->setTimeouts(10, 15);
-
         $today = Carbon::today();
         $tasks = $repository->getTodayTasks($today);
 
@@ -51,13 +42,33 @@ class TweetController extends Controller
             }
         }
 
-        if ($value = $request->text) {
-            $text = $text."\n".$value;
+        if ($comment = $request->comment) {
+            $text = $text."\n".$comment;
         }
+
+        return view('tweet.confirm', [
+            'text' => $text,
+            'comment' => $comment,
+        ]);
+    }
+
+    public function tweet(Request $request, TaskRepository $repository)
+    {
+        $user = Auth::user();
+        $connection = new TwitterOAuth(
+            config('app.twitter_consumer_key'),
+            config('app.twitter_secret_key'),
+            $user->twitter_token,
+            $user->twitter_token_secret
+        );
+        $connection->setTimeouts(10, 15);
+
+        $text = $request->text;
 
         $errorMsg = null;
         try {
             $connection->post("statuses/update", ["status" => $text]);
+            $request->session()->regenerateToken();
         } catch (TwitterOAuthException $exception) {
             $errorMsg = $exception->getMessage();
         }
@@ -69,12 +80,14 @@ class TweetController extends Controller
         }
 
         if ($code === 403) {
-            return redirect()->route('tweet.index')->with('message', '文字数が長すぎます')->withInput();
+            return redirect()->route('tweet.index')->with('message', 'ツイート内容が長すぎます')->withInput();
         }
 
         if (!$errorMsg) {
             $errorMsg = 'ツイートに失敗しました。再度ログインしてみてください';
         }
+
+        $request->session()->regenerateToken();
 
         return redirect()->route('mypage')->with('error', $errorMsg);
     }
