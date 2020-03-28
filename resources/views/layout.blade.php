@@ -29,7 +29,7 @@
                 <ul class="navbar-nav ml-auto">
                     @if(Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mypage') }}">マイページ</a>
+                            <a class="nav-link @if(Request::is('mypage*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">ログアウト</a>
