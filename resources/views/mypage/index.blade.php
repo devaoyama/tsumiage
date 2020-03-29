@@ -42,12 +42,37 @@
 
                 </table>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="delete-confirm btn btn-warning" data-toggle="modal" data-target="#confirm-delete">積み上げ削除</button>
-                    <a href="{{ route('tweet.index') }}" class="btn btn-primary"><i class="fab fa-twitter-square"></i> ツイートする</a>
+                    @if($dateStatus)
+                        <button type="button" class="delete-confirm btn btn-warning" data-toggle="modal" data-target="#confirm-delete">積み上げ削除</button>
+                    @endif
+                    <a href="{{ route('tweet.index') }}" class="btn btn-primary ml-auto"><i class="fab fa-twitter-square"></i> ツイートする</a>
                 </div>
             @else
-                <h4>タスクはありません</h4>
+                <h4>
+                    タスクはありません。<br>
+                    タスクを追加してみましょう！
+                </h4>
             @endif
+        </div>
+        <div class="card mt-5 bg-light">
+            <div class="card-body">
+                <h4 class="card-title"><i class="fas fa-angle-right mr-2"></i>手順</h4>
+                <ol class="card-text">
+                    <li>タスクを追加する</li>
+                    <li>「ツイートする」ボタンを押す</li>
+                    <li>「宣言ツイート」を選択して、コメントを入力する</li>
+                    <li>ツイートする</li>
+                    <li>積み上げる</li>
+                    <li>積み上げが完了したらタスク名の左の○を押す</li>
+                    <li>「ツイートする」ボタンを押す</li>
+                    <li>「報告ツイート」を選択して、コメントを入力する</li>
+                    <li>ツイートする</li>
+                </ol>
+                <h4 class="card-title"><i class="fas fa-exclamation-triangle mr-2"></i>注意</h4>
+                <ul class="card-text">
+                    <li>報告ツイートをすると、日付が変わり次第自動でタスクが削除されます。</li>
+                </ul>
+            </div>
         </div>
     </div>
 

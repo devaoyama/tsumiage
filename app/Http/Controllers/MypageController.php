@@ -32,6 +32,7 @@ class MypageController extends Controller
         return view('mypage.index', [
             'today' => $day,
             'tasks' => $tasks,
+            'dateStatus' => $date->date != Carbon::today()->toDateString(),
         ]);
     }
 }
