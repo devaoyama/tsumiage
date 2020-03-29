@@ -14,7 +14,7 @@ class MypageController extends Controller
         $day = Carbon::today();
 
         if ($date = $dateRepository->getDate()) {
-            if ($date->date != $day->toDateString() && $dateRepository->getTweetCount() >= 2) {
+            if ($date->date != $day->toDateString() && $dateRepository->getTweetStatus()) {
                 $date = $dateRepository->createDate();
                 $day = Carbon::parse($date->date);
             }

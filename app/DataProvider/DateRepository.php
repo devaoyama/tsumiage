@@ -29,15 +29,15 @@ class DateRepository
         return $this->date;
     }
 
-    public function getTweetCount()
+    public function getTweetStatus()
     {
-        return $this->getDate()->tweet_count;
+        return $this->getDate()->status;
     }
 
-    public function countUp()
+    public function changeStatusTrue()
     {
         $date = $this->getDate();
-        $date->tweet_count += 1;
+        $date->status = true;
         $date->save();
     }
 

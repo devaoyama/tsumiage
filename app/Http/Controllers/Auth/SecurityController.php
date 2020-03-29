@@ -56,6 +56,7 @@ class SecurityController extends Controller
             $authUser->name = $user->name;
             $authUser->nickname = $user->nickname;
             $authUser->twitter_id = $user->id;
+            $authUser->avatar = $user->avatar;
             $authUser->twitter_token = $user->token;
             $authUser->twitter_token_secret = $user->tokenSecret;
             $authUser->save();
@@ -65,6 +66,7 @@ class SecurityController extends Controller
             'name' => $user->name,
             'nickname' => $user->nickname,
             'twitter_id' => $user->id,
+            'avatar' => $user->avatar,
             'twitter_token' => $user->token,
             'twitter_token_secret' => $user->tokenSecret,
         ]);
