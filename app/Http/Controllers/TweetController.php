@@ -6,8 +6,8 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use Abraham\TwitterOAuth\TwitterOAuthException;
 use App\DataProvider\DateRepository;
 use App\DataProvider\TaskRepository;
+use App\Http\Requests\TweetForm;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
@@ -28,7 +28,7 @@ class TweetController extends Controller
         ]);
     }
 
-    public function tweetConfirm(Request $request, TaskRepository $repository)
+    public function tweetConfirm(TweetForm $request, TaskRepository $repository)
     {
         $tasks = $repository->getTasks();
 
@@ -49,10 +49,11 @@ class TweetController extends Controller
         return view('tweet.confirm', [
             'text' => $text,
             'comment' => $comment,
+            'status' => $request->status,
         ]);
     }
 
-    public function tweet(Request $request, DateRepository $repository)
+    public function tweet(TweetForm $request, DateRepository $repository)
     {
         $user = Auth::user();
         $connection = new TwitterOAuth(
@@ -76,7 +77,9 @@ class TweetController extends Controller
         $code = $connection->getLastHttpCode();
 
         if ($code === 200) {
-            $repository->countUp();
+            if ($request->status === '1') {
+                $repository->changeStatusTrue();
+            }
             return redirect()->route('mypage')->with('success', '投稿が完了しました');
         }
 
@@ -85,7 +88,7 @@ class TweetController extends Controller
         }
 
         if (!$errorMsg) {
-            $errorMsg = 'ツイートに失敗しました。再度ログインしてみてください';
+            $errorMsg = 'トークンの有効期限が切れています。再度ログインしてみてください';
         }
 
         $request->session()->regenerateToken();

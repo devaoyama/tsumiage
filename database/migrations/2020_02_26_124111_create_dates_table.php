@@ -17,7 +17,7 @@ class CreateDatesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->date('date');
-            $table->integer('tweet_count')->unsigned()->default(0);
+            $table->boolean('status')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

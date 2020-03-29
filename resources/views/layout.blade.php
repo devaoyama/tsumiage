@@ -15,6 +15,7 @@
         }
         .main {
             margin-top: 56px;
+            margin-bottom: 40px;
         }
         .navbar {
             opacity: 0.9;
@@ -32,12 +33,19 @@
             <a class="navbar-brand" href="/">積み上げくん</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                @if(Auth::check())
+                    <img src="{{ Auth::user()->avatar }}" alt="アバター" class="rounded-circle" width="30" height="30">
+                @else
+                    <span class="navbar-toggler-icon"></span>
+                @endif
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav4">
                 <ul class="navbar-nav ml-auto">
                     @if(Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link"><img src="{{ Auth::user()->avatar }}" alt="アバター" class="rounded-circle d-sm-block d-none" width="24" height="24"></a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link @if(Request::is('mypage*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
                         </li>

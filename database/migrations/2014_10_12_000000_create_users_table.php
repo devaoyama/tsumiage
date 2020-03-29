@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('nickname');
             $table->string('twitter_id');
+            $table->longText('avatar');
             $table->string('twitter_token');
             $table->string('twitter_token_secret');
             $table->rememberToken();
