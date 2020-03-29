@@ -10,9 +10,11 @@ class TaskController extends Controller
 {
     public function create(TaskCreate $request, TaskRepository $repository)
     {
-        $repository->createTask($request);
+        if ($repository->createTask($request)) {
+            return redirect()->route('mypage');
+        }
 
-        return redirect()->route('mypage');
+        return redirect()->route('mypage')->with('error', 'タスクは5個までしか登録できません');
     }
 
     public function changeStatus(Task $task, TaskRepository $repository)

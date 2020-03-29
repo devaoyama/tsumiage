@@ -102,7 +102,7 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">タスクを追加</h5>
-                        <p class="card-text">その日のタスクを追加しましょう。タスクの追加しすぎには注意しましょう。</p>
+                        <p class="card-text">その日のタスクを追加しましょう。タスクは最大で５つまで追加できます。</p>
                     </div>
                 </div>
 

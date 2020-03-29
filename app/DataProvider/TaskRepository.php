@@ -33,12 +33,16 @@ class TaskRepository
     {
         $date = $this->dateRepository->getDate();
 
-        if($date === null) {
+        if ($date === null) {
             $date = $this->dateRepository->createDate();
+        }
+        if ($date->tasks()->count() === 5) {
+            return false;
         }
 
         $this->task->title = $request->title;
         $date->tasks()->save($this->task);
+        return true;
     }
 
     public function changeStatus(Task $task)
