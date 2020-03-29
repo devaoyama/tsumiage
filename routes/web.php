@@ -15,11 +15,11 @@ Route::get('/', function() {
     return view('home.index');
 })->name('home');
 
-Route::get('/login', 'Auth\SecurityController@redirectToProvider');
+Route::get('/login', 'Auth\SecurityController@redirectToProvider')->name('login');
 Route::get('/login/callback', 'Auth\SecurityController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/logout', 'Auth\SecurityController@logout');
+    Route::get('/logout', 'Auth\SecurityController@logout')->name('logout');
     Route::get('/mypage', 'MypageController@index')->name('mypage');
     Route::post('/mypage/tasks/create', 'TaskController@create')->name('tasks.create');
     Route::get('/mypage/dates/create', 'DateController@create')->name('dates.create');

@@ -41,11 +41,11 @@
                             <a class="nav-link @if(Request::is('mypage*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">ログアウト</a>
+                            <a class="nav-link" href="{{ route('logout') }}">ログアウト</a>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">ログイン</a>
+                            <a class="nav-link" href="{{ route('login') }}">ログイン</a>
                         </li>
                     @endif
                 </ul>
