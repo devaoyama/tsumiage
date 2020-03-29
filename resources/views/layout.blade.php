@@ -2,8 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>積み上げくん</title>
 
@@ -13,12 +12,22 @@
         .done {
             text-decoration: line-through;
         }
+        .main {
+            margin-top: 56px;
+        }
+        .navbar {
+            opacity: 0.9;
+        }
+        footer {
+            opacity: 0.9;
+            font-size: 18px;
+        }
     </style>
     @yield('styles')
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="/">積み上げくん</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,12 +54,23 @@
     </header>
 
     <main>
-        @yield('content')
+        <div class="main">
+            @yield('content')
+        </div>
     </main>
 
-    <footer class="fixed-bottom bg-dark">
+    <footer class="bg-dark text-white fixed-bottom">
         <div class="container">
-            <p class="text-muted text-center m-0">&copy; 2020 <a href="https://twitter.com/maru_prog" class="">マル</a></p>
+            <div class="d-flex justify-content-around">
+                <div>
+                    <p class="overflow-hidden mb-0">© 2020 マル. All rights reserved.</p>
+                </div>
+                <div>
+                    <div class="float-right">
+                        <a href="https://twitter.com/maru_prog" class="text-primary"><i class="fab fa-twitter mx-2"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container pt-4">
         <div class="card bg-light mx-auto" style="max-width: 50rem">
             <div class="card-header">
                 <h3 class="card-title">ツイート内容</h3>

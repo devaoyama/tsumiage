@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="container mt-3">
+    <div class="container pt-4">
         <div class="text-center">
             <h3 class="mb-3">
                 {{ $today->isoFormat('YYYY年MM月DD日 (ddd)') }}
