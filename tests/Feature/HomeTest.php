@@ -2,13 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class HomeTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * A basic test example.
      *
@@ -16,7 +13,7 @@ class HomeTest extends TestCase
      */
     public function testIndex()
     {
-        $response = $this->get('/');
+        $response = $this->get(route('home'));
 
         $response->assertStatus(200);
     }
