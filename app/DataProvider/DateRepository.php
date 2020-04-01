@@ -29,11 +29,6 @@ class DateRepository
         return $this->date;
     }
 
-    public function getTweetStatus()
-    {
-        return $this->getDate()->status;
-    }
-
     public function changeStatusTrue()
     {
         $date = $this->getDate();

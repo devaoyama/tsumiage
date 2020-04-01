@@ -13,22 +13,28 @@ class MypageController extends Controller
         Carbon::setLocale('ja_JP');
         $day = Carbon::today();
         $dateStatus = null;
+        $tasks = null;
 
+        $needCreateDate = true;
         if ($date = $dateRepository->getDate()) {
-            if ($date->date != $day->toDateString() && $dateRepository->getTweetStatus()) {
-                $date = $dateRepository->createDate();
-                $day = Carbon::parse($date->date);
+
+            $tasks = $taskRepository->getTasks();
+
+            if ($dateStatus = $date->date != $day->toDateString()) {
+
+                if ($tasks && $tasks->count() && !$date->status) {
+
+                    $needCreateDate = false;
+                    $day = Carbon::parse($dateRepository->getDate()->date);
+                }
+            } else {
+                $needCreateDate = false;
             }
-            if ($date->date != $day->toDateString() && !$date->tasks->count()) {
-                $date = $dateRepository->createDate();
-                $day = Carbon::parse($date->date);
-            }
-            $dateStatus = $date->date != Carbon::today()->toDateString();
         }
 
-        $tasks = $taskRepository->getTasks();
-        if ($tasks && $tasks->count()) {
-            $day = Carbon::parse($dateRepository->getDate()->date);
+        if ($needCreateDate) {
+            $tasks = null;
+            $dateRepository->createDate();
         }
 
         return view('mypage.index', [
