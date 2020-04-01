@@ -50,7 +50,7 @@
                             <a class="nav-link @if(Request::is('mypage') || Request::is('mypage/tweet*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
                         </li>
                         <li>
-                            <a class="nav-link @if(Request::is('mypage/config')) active @endif" href="{{ route('user.config') }}">設定</a>
+                            <a class="nav-link @if(Request::is('mypage/config')) active @endif" href="{{ route('config.index') }}">設定</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}">ログアウト</a>

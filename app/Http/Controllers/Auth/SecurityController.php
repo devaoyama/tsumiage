@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Config;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -51,24 +52,18 @@ class SecurityController extends Controller
 
     private function findOrCreateUser($user)
     {
-        $authUser = User::where('twitter_id', $user->id)->first();
-        if ($authUser){
-            $authUser->name = $user->name;
-            $authUser->nickname = $user->nickname;
-            $authUser->twitter_id = $user->id;
-            $authUser->avatar = $user->avatar;
-            $authUser->twitter_token = $user->token;
-            $authUser->twitter_token_secret = $user->tokenSecret;
-            $authUser->save();
-            return $authUser;
+        if (!$authUser = User::where('twitter_id', $user->id)->first()) {
+            $authUser = new User();
+            $authUser->config()->save(new Config());
         }
-        return User::create([
-            'name' => $user->name,
-            'nickname' => $user->nickname,
-            'twitter_id' => $user->id,
-            'avatar' => $user->avatar,
-            'twitter_token' => $user->token,
-            'twitter_token_secret' => $user->tokenSecret,
-        ]);
+        $authUser->name = $user->name;
+        $authUser->nickname = $user->nickname;
+        $authUser->twitter_id = $user->id;
+        $authUser->avatar = $user->avatar;
+        $authUser->twitter_token = $user->token;
+        $authUser->twitter_token_secret = $user->tokenSecret;
+        $authUser->save();
+
+        return $authUser;
     }
 }
