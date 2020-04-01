@@ -43,7 +43,7 @@
                 </table>
                 <div class="d-flex justify-content-between">
                     @if($dateStatus)
-                        <button type="button" class="delete-confirm btn btn-warning" data-toggle="modal" data-target="#confirm-delete">積み上げ削除</button>
+                        <button type="button" class="delete-confirm btn btn-warning" data-toggle="modal" data-target="#confirm-delete"><i class="fas fa-exclamation-triangle"></i> 積み上げ削除</button>
                     @endif
                     <a href="{{ route('tweet.index') }}" class="btn btn-primary ml-auto"><i class="fab fa-twitter-square"></i> ツイートする</a>
                 </div>

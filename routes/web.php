@@ -30,6 +30,9 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::get('/mypage/tweet', 'TweetController@index')->name('tweet.index');
+    Route::get('mypage/tweet/confirm', function () {
+        return redirect()->route('tweet.index')->with('message', '予期せぬエラーが起きました。');
+    });
     Route::post('/mypage/tweet/confirm', 'TweetController@tweetConfirm')->name('tweet.confirm');
     Route::post('/mypage/tweet/tweet', 'TweetController@tweet')->name('tweet.tweet');
 });
