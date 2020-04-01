@@ -54,7 +54,6 @@ class SecurityController extends Controller
     {
         if (!$authUser = User::where('twitter_id', $user->id)->first()) {
             $authUser = new User();
-            $authUser->config()->save(new Config());
         }
         $authUser->name = $user->name;
         $authUser->nickname = $user->nickname;

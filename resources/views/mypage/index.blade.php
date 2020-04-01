@@ -27,12 +27,12 @@
                     @foreach($tasks as $task)
                         <tr>
                             <td>
-                                <form name="task_change_status" method="post" action="{{ route('tasks.changeStatus', ['task' => $task]) }}">
+                                <form name="change_status[{{ $task->id }}]" method="post" action="{{ route('tasks.changeStatus', ['task' => $task]) }}">
                                     @csrf
                                     @if($task->status)
-                                        <a href="javascript:task_change_status.submit()"><i class="far fa-check-circle text-primary" style="font-size: 25px"></i></a>
+                                        <button type="submit" class="btn btn-sm"><i class="far fa-check-circle text-primary" style="font-size: 25px"></i></button>
                                     @else
-                                        <a href="javascript:task_change_status.submit()"><i class="far fa-circle text-secondary" style="font-size: 25px"></i></a>
+                                        <button type="submit" class="btn btn-sm"><i class="far fa-circle text-secondary" style="font-size: 25px"></i></button>
                                     @endif
                                 </form>
                             </td>
@@ -40,7 +40,7 @@
                             <td>
                                 <form name="task_delete" method="post" action="{{ route('tasks.delete', ['task' => $task]) }}">
                                     @csrf
-                                    <a href="javascript:task_delete.submit()"><i class="fas fa-minus-circle text-danger" style="font-size: 25px"></i></a>
+                                    <button type="submit" class="btn btn-sm"><i class="fas fa-minus-circle text-danger" style="font-size: 25px"></i></button>
                                 </form>
                             </td>
                         </tr>

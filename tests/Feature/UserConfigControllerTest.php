@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use App\Config;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserConfigControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    use WithFaker;
 
     /**
      * A basic feature test example.
@@ -43,9 +46,11 @@ class UserConfigControllerTest extends TestCase
         $response = $this->actingAs($user)->post(route('config.save'), [
             'before_comment' => 'おはよう',
             'after_comment' => 'お疲れ様でした',
+            'public' => $this->faker->boolean,
+            'one_tweet' => $this->faker->boolean,
         ]);
 
-        $response->assertRedirect(route('config.index'));
+        $response->assertRedirect(route('mypage'));
 
         $this->assertDatabaseHas('configs', [
             'before_comment' => 'おはよう',
