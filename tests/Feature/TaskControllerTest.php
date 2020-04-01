@@ -37,7 +37,7 @@ class TaskControllerTest extends TestCase
 
         $user = $task->date->user;
 
-        $response = $this->actingAs($user)->get(route('tasks.changeStatus', ['task' => $task]));
+        $response = $this->actingAs($user)->post(route('tasks.changeStatus', ['task' => $task]));
 
         $response->assertRedirect(route('mypage'));
 
@@ -55,7 +55,7 @@ class TaskControllerTest extends TestCase
 
         $user = $task->date->user;
 
-        $response = $this->actingAs($user)->get(route('tasks.delete', ['task' => $task]));
+        $response = $this->actingAs($user)->post(route('tasks.delete', ['task' => $task]));
 
         $response->assertRedirect(route('mypage'));
 

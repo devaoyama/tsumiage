@@ -47,7 +47,10 @@
                             <a class="nav-link"><img src="{{ Auth::user()->avatar }}" alt="アバター" class="rounded-circle d-sm-block d-none" width="24" height="24"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if(Request::is('mypage*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
+                            <a class="nav-link @if(Request::is('mypage') || Request::is('mypage/tweet*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
+                        </li>
+                        <li>
+                            <a class="nav-link @if(Request::is('mypage/config')) active @endif" href="{{ route('user.config') }}">設定</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}">ログアウト</a>

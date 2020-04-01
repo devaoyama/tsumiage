@@ -27,19 +27,24 @@
                     @foreach($tasks as $task)
                         <tr>
                             <td>
-                                @if($task->status)
-                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}"><i class="far fa-check-circle text-primary" style="font-size: 25px"></i></a>
-                                @else
-                                    <a href="{{ route('tasks.changeStatus', ['task' => $task]) }}"><i class="far fa-circle text-secondary" style="font-size: 25px"></i></a>
-                                @endif
+                                <form name="task_change_status" method="post" action="{{ route('tasks.changeStatus', ['task' => $task]) }}">
+                                    @csrf
+                                    @if($task->status)
+                                        <a href="javascript:task_change_status.submit()"><i class="far fa-check-circle text-primary" style="font-size: 25px"></i></a>
+                                    @else
+                                        <a href="javascript:task_change_status.submit()"><i class="far fa-circle text-secondary" style="font-size: 25px"></i></a>
+                                    @endif
+                                </form>
                             </td>
                             <td @if($task->status) class="done" @endif>{{ $task->title }}</td>
                             <td>
-                                <a href="{{ route('tasks.delete', ['task' => $task]) }}"><i class="fas fa-minus-circle text-danger" style="font-size: 25px"></i></a>
+                                <form name="task_delete" method="post" action="{{ route('tasks.delete', ['task' => $task]) }}">
+                                    @csrf
+                                    <a href="javascript:task_delete.submit()"><i class="fas fa-minus-circle text-danger" style="font-size: 25px"></i></a>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
-
                 </table>
                 <div class="d-flex justify-content-between">
                     @if($dateStatus)
