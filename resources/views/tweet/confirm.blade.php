@@ -5,7 +5,9 @@
         <div class="card bg-light mx-auto" style="max-width: 50rem">
             <div class="card-header">
                 <h3 class="card-title mb-0">
-                    @if($status === '1')
+                    @if(Auth::user()->config->one_tweet)
+                        ツイート
+                    @elseif($status === '1')
                         報告ツイート
                     @else
                         宣言ツイート

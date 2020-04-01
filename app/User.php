@@ -23,4 +23,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Date');
     }
+
+    public function config()
+    {
+        return $this->hasOne('App\Config');
+    }
 }

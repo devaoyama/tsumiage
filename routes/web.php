@@ -38,5 +38,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/mypage/tweet/confirm', 'TweetController@tweetConfirm')->name('tweet.confirm');
     Route::post('/mypage/tweet/tweet', 'TweetController@tweet')->name('tweet.tweet');
 
-    Route::get('/mypage/config', 'MypageController@index')->name('user.config');
+    Route::get('/mypage/config', 'UserConfigController@index')->name('config.index');
+    Route::post('/mypage/config/save', 'UserConfigController@save')->name('config.save');
 });

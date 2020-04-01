@@ -30,9 +30,20 @@ class TweetController extends Controller
 
     public function tweetConfirm(TweetForm $request, TaskRepository $repository)
     {
+        $user = Auth::user();
+
         $tasks = $repository->getTasks();
 
-        $text = "#今日の積み上げ\n";
+        $text = null;
+        if ($request->status || $user->config->one_tweet) {
+            if ($text = $user->config->after_comment) {
+                $text = $text."\n\n";
+            }
+        } elseif ($request->status === '0' && $text = $user->config->before_comment) {
+            $text = $text."\n\n";
+        }
+
+        $text = $text."#今日の積み上げ\n";
         foreach ($tasks as $task) {
             if ($task->status) {
                 $text = $text."✅".$task->title."\n";
@@ -77,7 +88,7 @@ class TweetController extends Controller
         $code = $connection->getLastHttpCode();
 
         if ($code === 200) {
-            if ($request->status === '1') {
+            if ($request->status === '1' || $user->config->one_tweet) {
                 $repository->changeStatusTrue();
             }
             return redirect()->route('mypage')->with('success', '投稿が完了しました');

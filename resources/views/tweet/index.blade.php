@@ -39,19 +39,21 @@
                 </table>
                 <form action="{{ route('tweet.confirm') }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <p class="control-label"><b>ツイートの種類</b></p>
-                        <div class="d-flex justify-content-center">
-                            <div class="radio-inline mr-1">
-                                <input type="radio" value="0" name="status" id="false" {{ old('status') == '0' ? 'checked' : '' }} required>
-                                <label for="false">宣言ツイート</label>
-                            </div>
-                            <div class="radio-inline ml-1">
-                                <input type="radio" value="1" name="status" id="true" {{ old('status') == '1' ? 'checked' : '' }} required>
-                                <label for="true">報告ツイート</label>
+                    @if(!Auth::user()->config->one_tweet)
+                        <div class="form-group">
+                            <p class="control-label"><b>ツイートの種類</b></p>
+                            <div class="d-flex justify-content-center">
+                                <div class="radio-inline mr-1">
+                                    <input type="radio" value="0" name="status" id="false" {{ old('status') == '0' ? 'checked' : '' }} required>
+                                    <label for="false">宣言ツイート</label>
+                                </div>
+                                <div class="radio-inline ml-1">
+                                    <input type="radio" value="1" name="status" id="true" {{ old('status') == '1' ? 'checked' : '' }} required>
+                                    <label for="true">報告ツイート</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="form-group">
                         <label for="comment">ひとこと</label>
                         <textarea class="form-control" name="comment" id="comment" rows="5">{{ old('comment') }}</textarea>

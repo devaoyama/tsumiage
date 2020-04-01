@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TweetForm extends FormRequest
+class ConfigForm extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,16 @@ class TweetForm extends FormRequest
     public function rules()
     {
         return [
-            'status' => ['boolean'],
-            'comment' => ['max:140']
+            'before_comment' => ['max:40'],
+            'after_comment' => ['max:40'],
         ];
     }
 
     public function attributes()
     {
         return [
-            'status' => 'ツイートの種類',
-            'comment' => 'ひとこと'
+            'before_comment' => '宣言ツイートのコメント',
+            'after_comment' => '報告ツイートのコメント',
         ];
     }
 }
