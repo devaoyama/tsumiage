@@ -3,7 +3,7 @@
 @section('content')
     <div class="container pt-4">
         <h2 class="mb-3">設定</h2>
-        <form action="{{ route('config.update') }}" method="post">
+        <form action="{{ route('config.save') }}" method="post">
             @csrf
             <table class="table">
                 <tr>

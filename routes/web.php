@@ -39,5 +39,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/mypage/tweet/tweet', 'TweetController@tweet')->name('tweet.tweet');
 
     Route::get('/mypage/config', 'UserConfigController@index')->name('config.index');
-    Route::post('/mypage/save', 'UserConfigController@save')->name('config.update');
+    Route::post('/mypage/save', 'UserConfigController@save')->name('config.save');
 });
