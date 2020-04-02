@@ -42,10 +42,10 @@
 
             <div class="collapse navbar-collapse" id="navbarNav4">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @if(Request::is('/')) active @endif" href="{{ route('home') }}">TOP</a>
+                    </li>
                     @if(Auth::check())
-                        <li class="nav-item">
-                            <a class="nav-link"><img src="{{ Auth::user()->avatar }}" alt="アバター" class="rounded-circle d-sm-block d-none" width="24" height="24"></a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link @if(Request::is('mypage') || Request::is('mypage/tweet*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
                         </li>
