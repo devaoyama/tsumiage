@@ -18,6 +18,8 @@ class CreateDatesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->date('date');
             $table->boolean('status')->default(false);
+            $table->boolean('post_status')->default(false);
+            $table->longText('content')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

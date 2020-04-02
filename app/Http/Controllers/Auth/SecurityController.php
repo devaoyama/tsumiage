@@ -52,8 +52,10 @@ class SecurityController extends Controller
 
     private function findOrCreateUser($user)
     {
+        $newUser = false;
         if (!$authUser = User::where('twitter_id', $user->id)->first()) {
             $authUser = new User();
+            $newUser = true;
         }
         $authUser->name = $user->name;
         $authUser->nickname = $user->nickname;
@@ -62,6 +64,10 @@ class SecurityController extends Controller
         $authUser->twitter_token = $user->token;
         $authUser->twitter_token_secret = $user->tokenSecret;
         $authUser->save();
+
+        if ($newUser) {
+            $authUser->config()->save(new Config());
+        }
 
         return $authUser;
     }

@@ -88,6 +88,7 @@ class TweetController extends Controller
         $code = $connection->getLastHttpCode();
 
         if ($code === 200) {
+            $repository->changeStatusAndSaveContent($user, $text);
             if ($request->status === '1' || $user->config->one_tweet) {
                 $repository->changeStatusTrue();
             }

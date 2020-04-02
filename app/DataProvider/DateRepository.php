@@ -36,6 +36,14 @@ class DateRepository
         $date->save();
     }
 
+    public function changeStatusAndSaveContent($user, $text)
+    {
+        $date = $user->date;
+        $date->post_status = true;
+        $date->content = $text;
+        $date->save();
+    }
+
     private function deleteOtherDate()
     {
         if ($otherDay = Auth::user()->date) {
