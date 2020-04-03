@@ -160,6 +160,7 @@
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary font-weight-bold" style="padding: 12px;"><i class="fab fa-twitter"></i> ツイッターでログイン</a>
                     @endif
+                </div>
             </div>
         </div>
     </section>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Config;
 use App\Http\Requests\ConfigForm;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,9 +9,7 @@ class UserConfigController extends Controller
 {
     public function index()
     {
-        if (!$config = Auth::user()->config) {
-            $config = new Config();
-        }
+        $config = Auth::user()->config;
 
         return view('user_config.index', [
             'config' => $config
@@ -21,11 +18,7 @@ class UserConfigController extends Controller
 
     public function save(ConfigForm $request)
     {
-        $user = Auth::user();
-        if (!$config = $user->config) {
-            $config = new Config();
-            $config->user_id = $user->id;
-        }
+        $config = Auth::user()->config;
 
         $config->public = $request->public == true;
         $config->one_tweet = $request->one_tweet == true;

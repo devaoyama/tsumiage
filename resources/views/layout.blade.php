@@ -45,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link @if(Request::is('/')) active @endif" href="{{ route('home') }}">TOP</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(Request::is('board')) active @endif" href="{{ route('board') }}">掲示板</a>
+                    </li>
                     @if(Auth::check())
                         <li class="nav-item">
                             <a class="nav-link @if(Request::is('mypage') || Request::is('mypage/tweet*')) active @endif" href="{{ route('mypage') }}">マイページ</a>
