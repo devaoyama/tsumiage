@@ -15,6 +15,8 @@ Route::get('/', function() {
     return view('home.index');
 })->name('home');
 
+Route::get('/board', 'BoardController@index')->name('board');
+
 Route::get('/login', 'Auth\SecurityController@redirectToProvider')->name('login');
 Route::get('/login/callback', 'Auth\SecurityController@handleProviderCallback');
 

@@ -16,7 +16,7 @@ class CreateConfigsTable extends Migration
         Schema::create('configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->boolean('public')->default(false);
+            $table->boolean('public')->default(true);
             $table->boolean('one_tweet')->default(false);
             $table->string('before_comment')->nullable(true);
             $table->string('after_comment')->nullable(true);
