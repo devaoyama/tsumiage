@@ -19,7 +19,7 @@
                 <div class="col-lg-6">
                     <div class="card bg-light mb-4">
                         <div class="card-header">
-                            <a href="https://twitter.com/{{ $date->user->nickname }}">
+                            <a href="https://twitter.com/{{ $date->user->nickname }}" target="_blank">
                                 <img src="{{ $date->user->avatar }}" class="rounded-circle" height="30" width="30">
                                 {{ $date->user->name }}
                             </a>
