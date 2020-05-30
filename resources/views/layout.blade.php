@@ -85,12 +85,7 @@
         <div class="container">
             <div class="d-flex justify-content-around">
                 <div>
-                    <p class="overflow-hidden mb-0">© 2020 マル. All rights reserved.</p>
-                </div>
-                <div>
-                    <div class="float-right">
-                        <a href="https://twitter.com/maru_prog" class="text-primary"><i class="fab fa-twitter mx-2"></i></a>
-                    </div>
+                    <p class="overflow-hidden mb-0">© 2020 ケイタ. All rights reserved.</p>
                 </div>
             </div>
         </div>
